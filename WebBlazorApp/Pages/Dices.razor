@@ -1,0 +1,32 @@
+@page "/dices"
+
+<div style="margin-bottom: 20px">
+    <input type="number" placeholder="numbers" min="1" @bind="Numbers" style="width: 60px"/>
+    d
+    <input type="number" placeholder="faces" min="2" @bind="Faces" style="width: 60px"/>
+    +
+    <input type="number" placeholder="offset" @bind="Offset" style="width: 60px"/>
+</div>
+<div>
+    <button @onclick="GenerateRandomValue">Roll</button>
+</div>
+<h1>@Result</h1>
+
+@code
+{
+    private static int Numbers { get; set; } = 2;
+    private static int Faces { get; set; } = 6;
+    private int Offset { get; set; } = 6;
+    
+    private int Result { get; set; } = 0;
+
+    private void GenerateRandomValue()
+    {
+        Result = 0;
+        Random rand = new();
+        var randomNumbers = Enumerable.Range(0, Numbers)
+            .Select(_ => rand.Next(1, Faces+1))
+            .ToList();
+        Result = randomNumbers.Sum();
+    }
+}

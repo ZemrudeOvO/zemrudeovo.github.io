@@ -1,0 +1,47 @@
+﻿@page "/choose"
+
+<div style="margin-bottom: 100px">
+    <h1>@Title</h1>
+    <button @onclick="ChangeContent">决定</button>
+</div>
+
+<input type="text" @bind="TextInstantValue"/>
+<button @onclick="AddContent">add</button>
+
+<div>
+    @foreach (var i in _cooks)
+    {
+        <div>
+            <label>@i</label>
+            <button @onclick="() => DeleteItem(i)">delete</button>
+        </div>
+    }
+</div>
+
+@code
+{
+    private string? TextInstantValue { get; set; }
+    private string? Title { get; set; } = "晚上吃什么";
+
+    readonly List<string?> _cooks = ["麦当劳","肯德基"];
+
+    private void ChangeContent()
+    {
+        if (_cooks.Count > 0)
+        {
+            Random rand = new Random();
+            Title = _cooks[rand.Next(_cooks.Count)];
+        }
+    }
+
+    private void AddContent()
+    {
+        _cooks.Add(TextInstantValue);
+        TextInstantValue = "";
+    }
+
+    private void DeleteItem(string? i)
+    {
+        _cooks.Remove(i);
+    }
+}
