@@ -4,3 +4,5 @@ obj/
 riderModule.iml
 /_ReSharper.Caches/
 .idea/.idea.WebBlazorApp/.idea
+WebBlazorApp/.DS_Store
+.DS_Store
